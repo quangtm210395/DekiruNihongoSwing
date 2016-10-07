@@ -15,6 +15,11 @@ import org.json.*;
  */
 public class JSONParserBO {
     
+    /**
+     * parse a string to JSONObject
+     * @param s
+     * @return
+     */
     public static JSONObject parseJSON(String s) {
         try {
             return new JSONObject(s);
@@ -24,6 +29,12 @@ public class JSONParserBO {
         return null;
     }
     
+    /**
+     * get a lower JSONObject from another JSONObject
+     * @param jsonObject
+     * @param objName
+     * @return
+     */
     public static JSONObject parseJSONObject(JSONObject jsonObject, String objName) {
         try {
             return jsonObject.getJSONObject(objName);
@@ -33,6 +44,12 @@ public class JSONParserBO {
         return null;
     }
     
+    /**
+     * get a JSONArray from a JSONObject
+     * @param jsonObject
+     * @param arrName
+     * @return
+     */
     public static List<DNObject> parseJSONArray(JSONObject jsonObject, String arrName) {
         List<DNObject> list = new ArrayList<>();
         try {

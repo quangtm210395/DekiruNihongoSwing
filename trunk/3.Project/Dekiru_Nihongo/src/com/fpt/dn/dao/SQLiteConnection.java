@@ -22,6 +22,9 @@ public class SQLiteConnection {
     private Connection conn;
     private Statement st;
 
+    /**
+     * Constructor
+     */
     public SQLiteConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
@@ -39,6 +42,10 @@ public class SQLiteConnection {
         }
     }
     
+    /**
+     * get Local data from database
+     * @return
+     */
     public String getLocalData() {
         String localData;
         try {
@@ -52,6 +59,10 @@ public class SQLiteConnection {
         return null;
     }
     
+    /**
+     * get local revision from database
+     * @return
+     */
     public int getLocalRev() {
         int rev;
         try {
@@ -65,6 +76,12 @@ public class SQLiteConnection {
         return -1;
     }
     
+    /**
+     * update data with newest revision and data
+     * @param rev
+     * @param data
+     * @return
+     */
     public boolean updateData(String rev, String data){
         try {
             st.execute("UPDATE dnTable SET rev = "+ rev + ", dat = '"+ data + "' WHERE num = 1");
@@ -75,6 +92,9 @@ public class SQLiteConnection {
         return true;
     }
     
+    /**
+     * close database
+     */
     public void close() {
         if (conn != null) {
             conn = null;

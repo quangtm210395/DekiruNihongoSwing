@@ -24,17 +24,22 @@ import org.json.JSONObject;
  * @author Rin's
  */
 public class GetData extends Thread {
-        private final String httpUrl = "https://dekiru-nihongo.firebaseio.com/";
-        private ReceiveData callback;
-        private String request = "";
+    private final String httpUrl = "https://dekiru-nihongo.firebaseio.com/";
+    private ReceiveData callback;
+    private String request = "";
 
-        public GetData(String rq, ReceiveData callback) {
-            this.callback = callback;
-            this.request = rq;
-        }
-        
-        @Override
-        public void run() {
+    /**
+     * Constructor
+     * @param rq 
+     * @param callback 
+     */
+    public GetData(String rq, ReceiveData callback) {
+        this.callback = callback;
+        this.request = rq;
+    }
+
+    @Override
+    public void run() {
             String result = "";
             try {
                 URL url = new URL(httpUrl + request);
