@@ -34,5 +34,5 @@ public class DNObject {
         this.value = value;
     }
     
-    
+    public Object[] toObject(){return new Object[]{key,value};}
 }
