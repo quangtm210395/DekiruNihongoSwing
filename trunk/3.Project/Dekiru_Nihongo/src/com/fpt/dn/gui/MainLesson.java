@@ -5,7 +5,6 @@
  */
 package com.fpt.dn.gui;
 
-import com.fpt.dn.dao.DataProvider;
 import com.fpt.dn.entity.Properties;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -13,7 +12,6 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Stack;
-import java.util.List;
 
 /**
  *
@@ -46,7 +44,7 @@ public class MainLesson extends javax.swing.JFrame {
     }
 
     private void settingWindow() {
-        setTitle("できる 日本語");
+        setTitle("My Application");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,11 +83,13 @@ public class MainLesson extends javax.swing.JFrame {
 
         // List Lessons
         ArrayList<String> arrayListModel = new ArrayList<>();
-        DataProvider dp = new DataProvider();
-        List<String> listLessons = dp.getListOfLessonName("vocab", "1");
-        String paddingLeft = "  Lesson ";
-        for (int i = 0; i < listLessons.size(); i++) {
-            arrayListModel.add(paddingLeft + (i+1) + ": " + listLessons.get(i));
+        String[] lessons = {
+            "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5",
+            "Lesson 6", "Lesson 7", "Lesson 8", "Lesson 9", "Lesson 10",
+            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 14", "Lesson 15"};
+        String paddingLeft = "  ";
+        for (String strLesson : lessons) {
+            arrayListModel.add(paddingLeft + strLesson);
         }
 
         listLesson = new JList<>();
