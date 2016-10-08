@@ -9,6 +9,7 @@ package com.fpt.dn.dao;
  *
  * @author Tran Minh Quang
  */
-public interface ReceiveData{
+public interface ReceiveData {
+
     void onReceive(String result);
 }
