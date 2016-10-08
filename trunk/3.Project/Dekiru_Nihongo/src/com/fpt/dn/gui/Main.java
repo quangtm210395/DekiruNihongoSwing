@@ -9,7 +9,7 @@ import com.fpt.dn.dao.DataProvider;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class Main {
 

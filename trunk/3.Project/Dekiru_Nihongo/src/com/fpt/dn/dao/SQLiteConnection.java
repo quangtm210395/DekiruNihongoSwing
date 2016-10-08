@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class SQLiteConnection {
     private Connection conn;

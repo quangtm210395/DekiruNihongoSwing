@@ -11,7 +11,7 @@ import org.json.*;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class JSONParserBO {
     

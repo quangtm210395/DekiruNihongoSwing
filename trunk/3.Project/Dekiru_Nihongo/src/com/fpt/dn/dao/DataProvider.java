@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class DataProvider {
     private SQLiteConnection sqliteConnection;
@@ -70,16 +70,23 @@ public class DataProvider {
     /**
      * get all data of a lesson
      * @param part grammar or vocabulary or quiz...
+     * @param book number of book
      * @param lesson l1,l2,l3...
      * @return a list of object contains data
      */
     public List<DNObject> getDataOfLesson(String part, String book, String lesson) {
         part = part + book;
+        lesson = "l" + lesson;
         JSONObject jSONObject = JSONParserBO.parseJSON(getLocalData());
         return JSONParserBO.parseJSONArrayData(JSONParserBO.parseJSONObject(jSONObject, part), lesson);
     }
     
-    
+    /**
+     * Get a list of lessons name
+     * @param part 
+     * @param book
+     * @return a list of lesson name
+     */
     public List<String> getListOfLessonName(String part, String book) {
         String tableName;
         book = "b" + book;

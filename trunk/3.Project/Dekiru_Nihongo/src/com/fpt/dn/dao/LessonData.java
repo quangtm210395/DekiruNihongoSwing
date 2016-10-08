@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class LessonData {
     private static List<DNObject> listVocab;
@@ -42,8 +42,10 @@ public class LessonData {
         return listQuiz;
     }
     
-    
-    
+    /**
+     * Get array of vocabulary
+     * @return an array of vocabulary
+     */
     public String[] getVocabArray(){
         String[] vocabArray = new String[listVocab.size()];
         for (int i = 0; i < listVocab.size(); i++) {
@@ -52,6 +54,10 @@ public class LessonData {
         return vocabArray;
     }
     
+    /**
+     * Get array of vocabulary meanings
+     * @return an array of meanings
+     */
     public String[] getVocabMeansArray() {
         String[] meansArray = new String[listVocab.size()];
         for (int i = 0; i < listVocab.size(); i++) {
@@ -60,6 +66,10 @@ public class LessonData {
         return meansArray;
     }
     
+    /**
+     * Get an array of Grammar structure
+     * @return an array of grammar
+     */
     public String[] getGramArray() {
         String[] gramArray = new String[listGram.size()];
         for (int i = 0; i < listGram.size(); i++) {
@@ -68,6 +78,10 @@ public class LessonData {
         return gramArray;
     }
     
+    /**
+     * Get an array of Kanji
+     * @return an array of Kanji
+     */
     public String[] getKanjiArray() {
         String[] kanjiArray = new String[listKanji.size()];
         for (int i = 0; i < listKanji.size(); i++) {

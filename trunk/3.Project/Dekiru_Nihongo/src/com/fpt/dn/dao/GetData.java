@@ -6,7 +6,6 @@
 package com.fpt.dn.dao;
 
 import com.fpt.dn.bo.JSONParserBO;
-import com.fpt.dn.entity.DNObject;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -15,13 +14,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdk.nashorn.internal.parser.JSONParser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  *
- * @author Rin's
+ * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
  */
 public class GetData extends Thread {
     private final String httpUrl = "https://dekiru-nihongo.firebaseio.com/";
