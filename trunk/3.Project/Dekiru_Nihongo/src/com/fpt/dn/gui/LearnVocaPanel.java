@@ -204,6 +204,7 @@ public class LearnVocaPanel extends javax.swing.JFrame {
         listVocab.remove(currentQues);
         if (listVocab.isEmpty()) {
             btnNext.setEnabled(false);
+            labelQuestion.setText("Done");
         }
         label_icon_remain.setText(String.format("%-5s", "" + listVocab.size()));
 
