@@ -6,10 +6,14 @@
 package com.fpt.dn.gui;
 
 import com.fpt.dn.dao.LessonData;
+import com.fpt.dn.entity.DNObject;
 import com.fpt.dn.entity.Properties;
+import com.fpt.dn.entity.UnEditableTableModel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -20,60 +24,58 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author WindzLord
  */
-public class TabbedPanel extends javax.swing.JFrame {
+public class MainTabbedPanel extends javax.swing.JFrame {
 
-    // Variables declaration - do not modify                     
-    private javax.swing.JButton btnLearn;
     private javax.swing.JPanel panelVoca;
     private javax.swing.JPanel panelGram;
     private javax.swing.JPanel panelKanji;
     private javax.swing.JPanel panelQuiz;
+
     private javax.swing.JPanel panelMain;
-    private javax.swing.JTabbedPane tabbedPanel;
+    private javax.swing.JButton buttonnLearn;
 
     private JTable dataTableVoca;
     private JTable dataTableGram;
     private JTable dataTableKanji;
-    // End of variables declaration
+    private LessonData lessonData;
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form MainTabbedPanel
      *
      * @param lesson
      */
-    public TabbedPanel(String lesson) {
+    public MainTabbedPanel(String lesson) {
         initComponents();
-        addListeners(lesson);
         initData(lesson);
+        addListeners(lesson);
     }
 
     public JPanel getPanelMain() {
         return panelMain;
     }
 
-    public JTabbedPane getTabbedPane() {
-        return tabbedPanel;
-    }
-
     private void initComponents() {
 
-        panelMain = new javax.swing.JPanel();
-        tabbedPanel = new javax.swing.JTabbedPane();
+        JTabbedPane tabbedPanel = new javax.swing.JTabbedPane();
+
         panelVoca = new javax.swing.JPanel();
         panelGram = new javax.swing.JPanel();
         panelKanji = new javax.swing.JPanel();
         panelQuiz = new javax.swing.JPanel();
-        btnLearn = new javax.swing.JButton();
+
+        panelMain = new javax.swing.JPanel();
+        buttonnLearn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         panelMain.setLayout(new java.awt.BorderLayout());
 
-        btnLearn.setText("Learn vocabulary");
+        buttonnLearn.setText("Learn vocabulary");
+        buttonnLearn.setFont(new java.awt.Font("Dialog", 0, 18));
 
         tabbedPanel.addTab(Properties.tabVoca, panelVoca);
         panelVoca.setLayout(new BorderLayout());
-        panelVoca.add(btnLearn, BorderLayout.SOUTH);
+        panelVoca.add(buttonnLearn, BorderLayout.SOUTH);
 
         tabbedPanel.addTab(Properties.tabGram, panelGram);
         panelGram.setLayout(new BorderLayout());
@@ -91,21 +93,41 @@ public class TabbedPanel extends javax.swing.JFrame {
     }
 
     private void addListeners(String lesson) {
-        btnLearn.addActionListener((ActionEvent e) -> {
-            MainLessonPanel.instance.nextStackPanel(new LearnVocaPanel(lesson).getPanelMain());
+        buttonnLearn.addActionListener((ActionEvent e) -> {
+            MainLessonPanel.instance.nextStackPanel(new LearnVocabPanel(lesson).getPanelMain());
         });
+
+        if (lesson.charAt(0) <= '4' && lesson.length() == 1) {
+            dataTableGram.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        DNObject currentGram = lessonData.getListGram().get(dataTableGram.getSelectedRow());
+                        MainLessonPanel.instance.nextStackPanel(new LearnGramPanel(currentGram).getPanelMain());
+                    }
+                }
+            });
+        }
+
+        if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
+            dataTableKanji.addMouseListener(new MouseAdapter() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    if (e.getClickCount() == 2) {
+                        DNObject currentKanji = lessonData.getListKanji().get(dataTableKanji.getSelectedRow());
+                        MainLessonPanel.instance.nextStackPanel(new LearnKanjiPanel(currentKanji).getPanelMain());
+                    }
+                }
+
+            });
+        }
     }
 
     private void initData(String lesson) {
-        LessonData lessonData = new LessonData("1", lesson);
+        lessonData = new LessonData("1", lesson);
 
         // Vocabulary
-        DefaultTableModel defaultTableModelVocabulary = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        DefaultTableModel defaultTableModelVocabulary = new UnEditableTableModel();
         defaultTableModelVocabulary.addColumn("");
         defaultTableModelVocabulary.addColumn("");
         lessonData.getListVocab().stream().forEach((object) -> {
@@ -117,18 +139,11 @@ public class TabbedPanel extends javax.swing.JFrame {
         dataTableVoca.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
         dataTableVoca.setFont(new Font("Dialog", 0, 20));
         dataTableVoca.setRowHeight(30);
-
         panelVoca.add(new JScrollPane(dataTableVoca));
 
         // Kanji
-        if (lesson.charAt(0) <= '3') {
-            DefaultTableModel defaultTableModelKanji = new DefaultTableModel() {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
-
+        if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
+            UnEditableTableModel defaultTableModelKanji = new UnEditableTableModel();
             defaultTableModelKanji.addColumn("");
             defaultTableModelKanji.addColumn("");
             defaultTableModelKanji.addColumn("");
@@ -146,14 +161,8 @@ public class TabbedPanel extends javax.swing.JFrame {
         }
 
         // Grammar
-        if (lesson.charAt(0) <= '4') {
-            DefaultTableModel defaultTableModelGram = new DefaultTableModel() {
-                @Override
-                public boolean isCellEditable(int row, int column) {
-                    return false;
-                }
-            };
-
+        if (lesson.charAt(0) <= '4' && lesson.length() == 1) {
+            UnEditableTableModel defaultTableModelGram = new UnEditableTableModel();
             defaultTableModelGram.addColumn("");
             defaultTableModelGram.addColumn("");
             lessonData.getListGram().stream().forEach((object) -> {

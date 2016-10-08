@@ -7,13 +7,24 @@ package com.fpt.dn.gui;
 
 import com.fpt.dn.dao.DataProvider;
 import com.fpt.dn.entity.Properties;
-import javax.swing.*;
-import javax.swing.border.*;
-import java.awt.*;
-import java.awt.event.*;
-import java.util.ArrayList;
-import java.util.Stack;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
+import java.util.Stack;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -24,20 +35,15 @@ public class MainLessonPanel extends javax.swing.JFrame {
     public static MainLessonPanel instance = new MainLessonPanel();
 
     private final Stack<JPanel> stackPanel = new Stack<>();
+    private final String title = "できる 日本語";
 
-    // Variables declaration - do not modify                     
-    private JPanel panelWhole;
-    private JPanel panelTop;
     private JPanel panelMain;
-    private JPanel panelListLeson;
-    private JButton btnBack;
-    private JButton btnGo;
-    private JScrollPane scrollPaneListLesson;
+    private JButton buttonBack;
+    private JButton buttonSearch;
     JList<String> listLesson;
-    // End of variables declaration   
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form MainLessonPanel
      */
     public MainLessonPanel() {
         settingWindow();
@@ -46,7 +52,8 @@ public class MainLessonPanel extends javax.swing.JFrame {
     }
 
     private void settingWindow() {
-        setTitle("My Application");
+
+        setTitle(title);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,35 +61,35 @@ public class MainLessonPanel extends javax.swing.JFrame {
 
         setLocationRelativeTo(null);
         setResizable(false);
-
-        panelWhole = new JPanel(new BorderLayout());
-        getContentPane().add(panelWhole, BorderLayout.CENTER);
     }
 
     private void initComponents() {
 
-        panelTop = new JPanel(new BorderLayout());
-        panelWhole.add(panelTop, BorderLayout.NORTH);
+        JPanel panelAll = new JPanel(new BorderLayout());
+        getContentPane().add(panelAll, BorderLayout.CENTER);
 
-        btnBack = new JButton("Back");
-        btnBack.setFont(new java.awt.Font("Dialog", 0, 30));
-        panelTop.add(btnBack, BorderLayout.WEST);
+        JPanel panelTop = new JPanel(new BorderLayout());
+        panelAll.add(panelTop, BorderLayout.NORTH);
+
+        buttonBack = new JButton("Back");
+        buttonBack.setFont(new java.awt.Font("Dialog", 0, 30));
+        panelTop.add(buttonBack, BorderLayout.WEST);
 
         JPanel panelTopCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
         panelTopCenter.setBorder(new LineBorder(Color.BLACK, 2));
         panelTop.add(panelTopCenter, BorderLayout.CENTER);
 
-        JLabel lblName = new JLabel("できる 日本語");
+        JLabel lblName = new JLabel(title);
         lblName.setFont(new java.awt.Font("Dialog", 0, 30));
         panelTopCenter.add(lblName);
 
-        btnGo = new JButton("Go");
-        btnGo.setFont(new java.awt.Font("Dialog", 0, 30));
-        panelTop.add(btnGo, BorderLayout.EAST);
+        buttonSearch = new JButton("Search");
+        buttonSearch.setFont(new java.awt.Font("Dialog", 0, 30));
+        panelTop.add(buttonSearch, BorderLayout.EAST);
 
         panelMain = new JPanel(new GridLayout(0, 1));
         panelMain.setBorder(new EmptyBorder(Properties.screenBorder));
-        panelWhole.add(panelMain, BorderLayout.CENTER);
+        panelAll.add(panelMain, BorderLayout.CENTER);
 
         // List Lessons
         DefaultListModel<String> arrayListModel = new DefaultListModel<>();
@@ -98,20 +105,18 @@ public class MainLessonPanel extends javax.swing.JFrame {
         listLesson.setFont(new java.awt.Font("Dialog", 0, 18));
         listLesson.setFixedCellHeight(50);
 
-        scrollPaneListLesson = new JScrollPane(listLesson);
-
-        panelListLeson = new JPanel(new BorderLayout());
-        panelListLeson.add(scrollPaneListLesson, BorderLayout.CENTER);
+        JPanel panelListLeson = new JPanel(new BorderLayout());
+        panelListLeson.add(new JScrollPane(listLesson), BorderLayout.CENTER);
 
         nextStackPanel(panelListLeson);
     }
 
     private void addListeners() {
-        btnBack.addActionListener((ActionEvent event) -> {
+        buttonBack.addActionListener((ActionEvent event) -> {
             backStackPanel();
         });
 
-        btnGo.addActionListener((ActionEvent event) -> {
+        buttonSearch.addActionListener((ActionEvent event) -> {
 
         });
 
@@ -120,7 +125,7 @@ public class MainLessonPanel extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int lesson = listLesson.getSelectedIndex() + 1;
-                    nextStackPanel(new TabbedPanel("" + lesson).getPanelMain());
+                    nextStackPanel(new MainTabbedPanel("" + lesson).getPanelMain());
                 }
             }
         });
@@ -133,7 +138,6 @@ public class MainLessonPanel extends javax.swing.JFrame {
         stackPanel.push(nextPanel);
         panelMain.add(stackPanel.peek());
         refreshScreen();
-        repaint();
     }
 
     public void backStackPanel() {
