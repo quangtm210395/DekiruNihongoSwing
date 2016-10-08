@@ -29,20 +29,25 @@ public class Main {
                 // update found
                 new DataProvider().requestData("data.json", (String result1) -> {
                     if (result1.equals("")) {
+                        //update found but can not get data
                         return;
                     }
-                    boolean upd = dp.updateData(String.valueOf(newestRev), result1);
-                    if (upd) {
+                    boolean canUpd = dp.updateData(String.valueOf(newestRev), result1);
+                    if (canUpd) {
+                        // update to database successful
                         System.out.println("Update successful!");
                     } else {
+                        // update to database failed
                         System.out.println("Update failed!");
                     }
                 });
             } else {
+                // update not found
                 System.out.println("No update");
                 return;
             }
         });
-
+        
+        System.out.println(dp.getListOfLessonName("vocab", "b1"));
     }
 }

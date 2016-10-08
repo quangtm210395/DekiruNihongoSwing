@@ -10,7 +10,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,7 +30,6 @@ public class SQLiteConnection {
             conn = DriverManager.getConnection("jdbc:sqlite:dn.db");
             st = conn.createStatement();
             st.execute("CREATE TABLE IF NOT EXISTS dnTable (num integer, rev int, dat text)");
-            int numRow;
             ResultSet rs = st.executeQuery("SELECT Count(*) from dnTable");
             if (!rs.next()) {
                 st.execute("INSERT INTO dnTable (num, rev) values(1, 0)");

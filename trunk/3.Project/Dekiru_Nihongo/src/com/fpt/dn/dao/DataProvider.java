@@ -5,6 +5,11 @@
  */
 package com.fpt.dn.dao;
 
+import com.fpt.dn.bo.JSONParserBO;
+import com.fpt.dn.entity.DNObject;
+import java.util.List;
+import org.json.JSONObject;
+
 
 /**
  *
@@ -39,7 +44,7 @@ public class DataProvider {
     
     /**
      * get local data
-     * @return
+     * @return local data
      */
     public String getLocalData() {
         return sqliteConnection.getLocalData();
@@ -49,7 +54,7 @@ public class DataProvider {
      * update new data
      * @param rev newest revision
      * @param data newest data
-     * @return
+     * @return update successful or failed
      */
     public boolean updateData(String rev, String data) {
         return sqliteConnection.updateData(rev, data);
@@ -60,6 +65,30 @@ public class DataProvider {
      */
     public void closeDB() {
         sqliteConnection.close();
+    }
+    
+    /**
+     * get all data of a lesson
+     * @param part grammar or vocabulary or quiz...
+     * @param lesson l1,l2,l3...
+     * @return a list of object contains data
+     */
+    public List<DNObject> getDataOfLesson(String part, String book, String lesson) {
+        part = part + book;
+        JSONObject jSONObject = JSONParserBO.parseJSON(getLocalData());
+        return JSONParserBO.parseJSONArrayData(JSONParserBO.parseJSONObject(jSONObject, part), lesson);
+    }
+    
+    
+    public List<String> getListOfLessonName(String part, String book) {
+        String tableName;
+        book = "b" + book;
+        if (part.equals("vocab")) tableName = "list1";
+        else if (part.equals("gra")) tableName = "list2";
+        else if (part.equals("quiz")) tableName = "list3";
+        else tableName = "list4";
+        JSONObject jSONObject = JSONParserBO.parseJSON(getLocalData());
+        return JSONParserBO.parseJSONArrayName(JSONParserBO.parseJSONObject(jSONObject, tableName), book);
     }
     
 }

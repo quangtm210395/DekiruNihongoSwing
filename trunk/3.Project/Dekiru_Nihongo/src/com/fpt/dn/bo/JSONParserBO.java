@@ -50,17 +50,38 @@ public class JSONParserBO {
      * @param arrName
      * @return
      */
-    public static List<DNObject> parseJSONArray(JSONObject jsonObject, String arrName) {
+    public static List<DNObject> parseJSONArrayData(JSONObject jsonObject, String arrName) {
         List<DNObject> list = new ArrayList<>();
         try {
             JSONArray array = jsonObject.getJSONArray(arrName);
-            for (int i = 0; i < arrName.length(); i++) {
+            for (int i = 0; i < array.length(); i++) {
                 JSONObject obj = (JSONObject) array.get(i);
                 DNObject objectDN = new DNObject(obj.getString("n"), obj.getString("m"));
                 list.add(objectDN);
             }
         } catch (JSONException e) {
             e.printStackTrace();
+            return null;
+        }
+        return list;
+    }
+    
+    /**
+     * 
+     * @param jsonObject
+     * @param arrName
+     * @return List of name of lessons
+     */
+    public static List<String> parseJSONArrayName(JSONObject jsonObject, String arrName) {
+        List<String> list = new ArrayList<>();
+        try {
+            JSONArray array = jsonObject.getJSONArray(arrName);
+            for (int i = 0; i < array.length(); i++) {
+                list.add((String)array.get(i));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
         }
         return list;
     }

@@ -46,6 +46,22 @@ public class DNObject {
     public String getValue() {
         return value;
     }
+    
+    /**
+     * Get an array of answers if Object is quiz
+     * @return the array of answers
+     */
+    public String[] getQuizAnswer() {
+        return value.split(" | ");
+    }
+    
+    /**
+     * Get the wright answer if Object is quiz
+     * @return the wright answer 
+     */
+    public String getWrightAnswer() {
+        return getQuizAnswer()[4];
+    }
 
     /**
      * set value
