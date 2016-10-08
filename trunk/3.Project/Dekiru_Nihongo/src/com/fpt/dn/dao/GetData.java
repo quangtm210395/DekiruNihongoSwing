@@ -19,7 +19,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class GetData extends Thread {
     private final String httpUrl = "https://dekiru-nihongo.firebaseio.com/";
@@ -28,8 +28,8 @@ public class GetData extends Thread {
 
     /**
      * Constructor
-     * @param rq 
-     * @param callback 
+     * @param rq request: version or data
+     * @param callback call back to process the data
      */
     public GetData(String rq, ReceiveData callback) {
         this.callback = callback;

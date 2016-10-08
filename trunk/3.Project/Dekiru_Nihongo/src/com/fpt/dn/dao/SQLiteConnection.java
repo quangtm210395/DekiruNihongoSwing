@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class SQLiteConnection {
     private Connection conn;
@@ -42,7 +42,7 @@ public class SQLiteConnection {
     
     /**
      * get Local data from database
-     * @return
+     * @return the local data
      */
     public String getLocalData() {
         String localData;
@@ -59,7 +59,7 @@ public class SQLiteConnection {
     
     /**
      * get local revision from database
-     * @return
+     * @return local revision
      */
     public int getLocalRev() {
         int rev;
@@ -76,9 +76,9 @@ public class SQLiteConnection {
     
     /**
      * update data with newest revision and data
-     * @param rev
-     * @param data
-     * @return
+     * @param rev newest revision
+     * @param data newest data
+     * @return can update or not
      */
     public boolean updateData(String rev, String data){
         try {

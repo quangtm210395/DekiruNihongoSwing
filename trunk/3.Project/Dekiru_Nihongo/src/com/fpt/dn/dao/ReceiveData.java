@@ -7,7 +7,7 @@ package com.fpt.dn.dao;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public interface ReceiveData{
     void onReceive(String result);

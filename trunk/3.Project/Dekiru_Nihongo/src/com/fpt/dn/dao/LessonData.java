@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class LessonData {
     private static List<DNObject> listVocab;

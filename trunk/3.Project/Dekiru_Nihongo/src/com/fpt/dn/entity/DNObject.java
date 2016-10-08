@@ -7,7 +7,7 @@ package com.fpt.dn.entity;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class DNObject {
     private String key;
@@ -15,8 +15,8 @@ public class DNObject {
 
     /**
      * Constructor
-     * @param key
-     * @param value
+     * @param key vocabulary or grammar structure or kanji...
+     * @param value meanings or explanation or information of kanji
      */
     public DNObject(String key, String value) {
         this.key = key;
@@ -25,7 +25,7 @@ public class DNObject {
 
     /**
      * get key
-     * @return
+     * @return key
      */
     public String getKey() {
         return key;
@@ -33,7 +33,7 @@ public class DNObject {
 
     /**
      * set key
-     * @param key
+     * @param key require key to set
      */
     public void setKey(String key) {
         this.key = key;
@@ -41,7 +41,7 @@ public class DNObject {
 
     /**
      * get value
-     * @return
+     * @return value
      */
     public String getValue() {
         return value;
@@ -65,7 +65,7 @@ public class DNObject {
 
     /**
      * set value
-     * @param value
+     * @param value require value to set
      */
     public void setValue(String value) {
         this.value = value;
@@ -73,7 +73,7 @@ public class DNObject {
     
     /**
      * return an object to add to table
-     * @return
+     * @return an object[] contains key and value
      */
     public Object[] toObject(){return new Object[]{key,value};}
 }

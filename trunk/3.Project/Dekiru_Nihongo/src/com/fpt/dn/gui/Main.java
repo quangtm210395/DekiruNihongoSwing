@@ -9,7 +9,7 @@ import com.fpt.dn.dao.DataProvider;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class Main {
 
@@ -48,6 +48,6 @@ public class Main {
             }
         });
         
-        System.out.println(dp.getListOfLessonName("vocab", "b1"));
+        System.out.println(dp.getListOfLessonName("vocab", "1"));
     }
 }

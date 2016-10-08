@@ -11,18 +11,18 @@ import org.json.*;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class JSONParserBO {
     
     /**
-     * parse a string to JSONObject
-     * @param s
-     * @return
+     * get a JSONObject from a string
+     * @param string to parse to JSONObject
+     * @return an JSONObject
      */
-    public static JSONObject parseJSON(String s) {
+    public static JSONObject parseJSON(String string) {
         try {
-            return new JSONObject(s);
+            return new JSONObject(string);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -30,10 +30,10 @@ public class JSONParserBO {
     }
     
     /**
-     * get a lower JSONObject from another JSONObject
-     * @param jsonObject
-     * @param objName
-     * @return
+     * get a lower JSONObject from another JSONObject with name objName
+     * @param jsonObject higher JSONObject
+     * @param objName name of Object need to parse JSON
+     * @return a JSONObject
      */
     public static JSONObject parseJSONObject(JSONObject jsonObject, String objName) {
         try {
@@ -45,10 +45,10 @@ public class JSONParserBO {
     }
     
     /**
-     * get a JSONArray from a JSONObject
-     * @param jsonObject
-     * @param arrName
-     * @return
+     * get a List from a JSONObject
+     * @param jsonObject higher JSONObject
+     * @param arrName name of JSONArray
+     * @return a List of data
      */
     public static List<DNObject> parseJSONArrayData(JSONObject jsonObject, String arrName) {
         List<DNObject> list = new ArrayList<>();
@@ -67,9 +67,9 @@ public class JSONParserBO {
     }
     
     /**
-     * 
-     * @param jsonObject
-     * @param arrName
+     * get a list of lesson name
+     * @param jsonObject higher JSONObject
+     * @param arrName name of JSONArray
      * @return List of name of lessons
      */
     public static List<String> parseJSONArrayName(JSONObject jsonObject, String arrName) {

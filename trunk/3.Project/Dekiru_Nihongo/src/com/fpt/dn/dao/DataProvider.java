@@ -13,7 +13,7 @@ import org.json.JSONObject;
 
 /**
  *
- * @author Tran Minh Quang <quangtmse04402@fpt.edu.vn>
+ * @author Tran Minh Quang
  */
 public class DataProvider {
     private SQLiteConnection sqliteConnection;
@@ -83,8 +83,8 @@ public class DataProvider {
     
     /**
      * Get a list of lessons name
-     * @param part 
-     * @param book
+     * @param part require part of lesson
+     * @param book require book number
      * @return a list of lesson name
      */
     public List<String> getListOfLessonName(String part, String book) {
