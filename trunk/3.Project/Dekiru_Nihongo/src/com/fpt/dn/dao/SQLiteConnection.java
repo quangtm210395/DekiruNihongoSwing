@@ -18,6 +18,7 @@ import java.util.logging.Logger;
  * @author Tran Minh Quang
  */
 public class SQLiteConnection {
+
     private Connection conn;
     private Statement st;
 
@@ -39,9 +40,10 @@ public class SQLiteConnection {
             Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     /**
      * get Local data from database
+     *
      * @return the local data
      */
     public String getLocalData() {
@@ -49,16 +51,17 @@ public class SQLiteConnection {
         try {
             ResultSet rs = st.executeQuery("SELECT * FROM dnTable");
             rs.next();
-            localData= rs.getString(3);
+            localData = rs.getString(3);
             return localData;
         } catch (SQLException ex) {
             Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
     /**
      * get local revision from database
+     *
      * @return local revision
      */
     public int getLocalRev() {
@@ -73,23 +76,24 @@ public class SQLiteConnection {
         }
         return -1;
     }
-    
+
     /**
      * update data with newest revision and data
+     *
      * @param rev newest revision
      * @param data newest data
      * @return can update or not
      */
-    public boolean updateData(String rev, String data){
+    public boolean updateData(String rev, String data) {
         try {
-            st.execute("UPDATE dnTable SET rev = "+ rev + ", dat = '"+ data + "' WHERE num = 1");
+            st.execute("UPDATE dnTable SET rev = " + rev + ", dat = '" + data + "' WHERE num = 1");
         } catch (SQLException ex) {
             Logger.getLogger(SQLiteConnection.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
     }
-    
+
     /**
      * close database
      */
@@ -98,7 +102,5 @@ public class SQLiteConnection {
             conn = null;
         }
     }
-    
-    
-    
+
 }

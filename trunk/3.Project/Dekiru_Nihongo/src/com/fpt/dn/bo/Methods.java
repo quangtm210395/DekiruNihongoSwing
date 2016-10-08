@@ -5,6 +5,7 @@
  */
 package com.fpt.dn.bo;
 
+import java.util.Random;
 import javax.swing.ImageIcon;
 
 /**
@@ -13,8 +14,17 @@ import javax.swing.ImageIcon;
  */
 public class Methods {
 
-    public static ImageIcon newImageIcon(String path, int width, int height) {
-        return (new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(width, height, 0)));
+    private static Random random = new Random();
+
+    public static ImageIcon newImageIcon(String path, int slaceWidth, int scaleHeight) {
+        return (new ImageIcon(new ImageIcon(path).getImage().getScaledInstance(slaceWidth, scaleHeight, 0)));
+    }
+
+    public static int getRandom(int max) {
+        if (max == 0) {
+            return -1;
+        }
+        return random.nextInt(max);
     }
 
 }

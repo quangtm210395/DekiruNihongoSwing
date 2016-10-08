@@ -22,12 +22,14 @@ import org.json.JSONObject;
  * @author Tran Minh Quang
  */
 public class GetData extends Thread {
+
     private final String httpUrl = "https://dekiru-nihongo.firebaseio.com/";
     private ReceiveData callback;
     private String request = "";
 
     /**
      * Constructor
+     *
      * @param rq request: version or data
      * @param callback call back to process the data
      */
@@ -38,31 +40,31 @@ public class GetData extends Thread {
 
     @Override
     public void run() {
-            String result = "";
-            try {
-                URL url = new URL(httpUrl + request);
-                HttpURLConnection conn  = (HttpURLConnection) url.openConnection();
-                System.out.println(conn.getHeaderFields());
-                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                String line ;
-                while( (line = br.readLine()) != null) {
-                    result += line;
-                }
-                br.close();
-                if (request.equals("version.json")) {
-                    try {
-                        JSONObject jsonObject = JSONParserBO.parseJSON(result);
-                        result = jsonObject.getInt("ver") + "";
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                }
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(DataProvider.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(DataProvider.class.getName()).log(Level.SEVERE, null, ex);
+        String result = "";
+        try {
+            URL url = new URL(httpUrl + request);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            System.out.println(conn.getHeaderFields());
+            BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String line;
+            while ((line = br.readLine()) != null) {
+                result += line;
             }
-            callback.onReceive(result);
+            br.close();
+            if (request.equals("version.json")) {
+                try {
+                    JSONObject jsonObject = JSONParserBO.parseJSON(result);
+                    result = jsonObject.getInt("ver") + "";
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(DataProvider.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(DataProvider.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        callback.onReceive(result);
     }
+
+}

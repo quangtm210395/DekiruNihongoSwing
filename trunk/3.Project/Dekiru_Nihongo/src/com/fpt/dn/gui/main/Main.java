@@ -6,7 +6,7 @@
 package com.fpt.dn.gui.main;
 
 import com.fpt.dn.dao.DataProvider;
-import com.fpt.dn.gui.MainLesson;
+import com.fpt.dn.gui.MainLessonPanel;
 
 /**
  *
@@ -17,7 +17,7 @@ public class Main {
     private static final boolean isTesting = false;
 
     public static void main(String[] args) {
-        MainLesson.instance.setVisible(true);
+        MainLessonPanel.instance.setVisible(true);
 
         if (isTesting) {
             testServer();

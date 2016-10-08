@@ -7,17 +7,19 @@ package com.fpt.dn.dao;
 
 import com.fpt.dn.entity.DNObject;
 import java.util.List;
+import org.json.JSONException;
 
 /**
  *
  * @author Tran Minh Quang
  */
 public class LessonData {
+
     private static List<DNObject> listVocab;
     private static List<DNObject> listGram;
     private static List<DNObject> listKanji;
     private static List<DNObject> listQuiz;
-    
+
     public LessonData(String book, String lesson) {
         DataProvider dp = new DataProvider();
         listVocab = dp.getDataOfLesson("vocab", book, lesson);
@@ -25,37 +27,39 @@ public class LessonData {
         listKanji = dp.getDataOfLesson("kan", book, lesson);
         listQuiz = dp.getDataOfLesson("quiz", book, lesson);
     }
-    
-    public static List<DNObject> getListVocab() {
+
+    public List<DNObject> getListVocab() {
         return listVocab;
     }
 
-    public static List<DNObject> getListGram() {
+    public List<DNObject> getListGram() {
         return listGram;
     }
 
-    public static List<DNObject> getListKanji() {
+    public List<DNObject> getListKanji() {
         return listKanji;
     }
 
-    public static List<DNObject> getListQuiz() {
+    public List<DNObject> getListQuiz() {
         return listQuiz;
     }
-    
+
     /**
      * Get array of vocabulary
+     *
      * @return an array of vocabulary
      */
-    public String[] getVocabArray(){
+    public String[] getVocabArray() {
         String[] vocabArray = new String[listVocab.size()];
         for (int i = 0; i < listVocab.size(); i++) {
             vocabArray[i] = listVocab.get(i).getKey();
         }
         return vocabArray;
     }
-    
+
     /**
      * Get array of vocabulary meanings
+     *
      * @return an array of meanings
      */
     public String[] getVocabMeansArray() {
@@ -65,9 +69,10 @@ public class LessonData {
         }
         return meansArray;
     }
-    
+
     /**
      * Get an array of Grammar structure
+     *
      * @return an array of grammar
      */
     public String[] getGramArray() {
@@ -77,9 +82,10 @@ public class LessonData {
         }
         return gramArray;
     }
-    
+
     /**
      * Get an array of Kanji
+     *
      * @return an array of Kanji
      */
     public String[] getKanjiArray() {
@@ -89,6 +95,5 @@ public class LessonData {
         }
         return kanjiArray;
     }
-    
-    
+
 }

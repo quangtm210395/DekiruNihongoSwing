@@ -5,6 +5,7 @@
  */
 package com.fpt.dn.gui;
 
+import com.fpt.dn.dao.DataProvider;
 import com.fpt.dn.entity.Properties;
 import javax.swing.*;
 import javax.swing.border.*;
@@ -12,14 +13,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Stack;
+import java.util.List;
 
 /**
  *
  * @author WindzLord
  */
-public class MainLesson extends javax.swing.JFrame {
+public class MainLessonPanel extends javax.swing.JFrame {
 
-    public static MainLesson instance = new MainLesson();
+    public static MainLessonPanel instance = new MainLessonPanel();
 
     private final Stack<JPanel> stackPanel = new Stack<>();
 
@@ -37,7 +39,7 @@ public class MainLesson extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public MainLesson() {
+    public MainLessonPanel() {
         settingWindow();
         initComponents();
         addListeners();
@@ -67,6 +69,7 @@ public class MainLesson extends javax.swing.JFrame {
         panelTop.add(btnBack, BorderLayout.WEST);
 
         JPanel panelTopCenter = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelTopCenter.setBorder(new LineBorder(Color.BLACK, 2));
         panelTop.add(panelTopCenter, BorderLayout.CENTER);
 
         JLabel lblName = new JLabel("できる 日本語");
@@ -82,28 +85,14 @@ public class MainLesson extends javax.swing.JFrame {
         panelWhole.add(panelMain, BorderLayout.CENTER);
 
         // List Lessons
-        ArrayList<String> arrayListModel = new ArrayList<>();
-        String[] lessons = {
-            "Lesson 1", "Lesson 2", "Lesson 3", "Lesson 4", "Lesson 5",
-            "Lesson 6", "Lesson 7", "Lesson 8", "Lesson 9", "Lesson 10",
-            "Lesson 11", "Lesson 12", "Lesson 13", "Lesson 14", "Lesson 15"};
-        String paddingLeft = "  ";
-        for (String strLesson : lessons) {
-            arrayListModel.add(paddingLeft + strLesson);
+        DefaultListModel<String> arrayListModel = new DefaultListModel<>();
+
+        List<String> listLessons = new DataProvider().getListOfLessonName("vocab", "1");
+        String paddingLeft = "  Lesson ";
+        for (int i = 0; i < listLessons.size(); i++) {
+            arrayListModel.addElement(paddingLeft + (i + 1) + ": " + listLessons.get(i));
         }
-
-        listLesson = new JList<>();
-        listLesson.setModel(new javax.swing.AbstractListModel<String>() {
-            @Override
-            public int getSize() {
-                return arrayListModel.size();
-            }
-
-            @Override
-            public String getElementAt(int i) {
-                return arrayListModel.get(i);
-            }
-        });
+        listLesson = new JList<>(arrayListModel);
         listLesson.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         listLesson.setBackground(new Color(222, 222, 222));
         listLesson.setFont(new java.awt.Font("Dialog", 0, 18));
@@ -131,7 +120,7 @@ public class MainLesson extends javax.swing.JFrame {
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int lesson = listLesson.getSelectedIndex() + 1;
-                    nextStackPanel(new TabbedPanel().getPanelMain());
+                    nextStackPanel(new TabbedPanel("" + lesson).getPanelMain());
                 }
             }
         });

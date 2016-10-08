@@ -6,12 +6,13 @@
 package com.fpt.dn.gui;
 
 import com.fpt.dn.bo.Methods;
-import java.awt.Color;
+import com.fpt.dn.dao.LessonData;
+import com.fpt.dn.entity.DNObject;
+import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Image;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import java.awt.event.ActionEvent;
+import java.util.List;
+import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
@@ -20,31 +21,72 @@ import javax.swing.JPanel;
  */
 public class LearnVocaPanel extends javax.swing.JFrame {
 
+    private JButton buttonStart;
+    private JPanel panelButtonStart;
+    private List<DNObject> listVocab;
+    private DNObject currentQues;
+    private int correct;
+    private int incorrect;
+    private String lesson;
+
     /**
      * Creates new form NewJFrame
+     *
+     * @param lesson
      */
-    public LearnVocaPanel() {
+    public LearnVocaPanel(String lesson) {
         initComponents();
-        myInit();
+        setLesson(lesson);
+        initData();
+        initScreen();
+        addListeners();
     }
 
     public JPanel getPanelMain() {
         return panelMain;
     }
 
-    private void myInit() {
+    private void setLesson(String lesson) {
+        this.lesson = lesson;
+    }
+
+    private void initScreen() {
+        buttonStart = new JButton("Start");
+        buttonStart.setFont(new Font("Dialog", 0, 30));
+        panelButtonStart = new JPanel(new BorderLayout());
+        panelButtonStart.add(buttonStart, BorderLayout.SOUTH);
+        panelMain.remove(panelCenter);
+        panelMain.add(panelButtonStart);
+        repaint();
+    }
+
+    private void initData() {
+        listVocab = new LessonData("1", lesson).getListVocab();
+        correct = incorrect = 0;
+
         label_icon_remain.setIcon(Methods.newImageIcon("src/icon/ic_remain.png", 60, 60));
-        label_icon_remain.setText(String.format("%-5s", "60"));
+        label_icon_remain.setText(String.format("%-5s", "" + listVocab.size()));
         label_icon_remain.setFont(new Font("Dialog", 0, 24));
-        
+
         label_icon_correct.setIcon(Methods.newImageIcon("src/icon/ic_correct.png", 60, 60));
-        label_icon_correct.setText(String.format("%-5s", "0"));
+        label_icon_correct.setText(String.format("%-5s", "" + correct));
         label_icon_correct.setFont(new Font("Dialog", 0, 24));
-        
+
         label_icon_incorrect.setIcon(Methods.newImageIcon("src/icon/ic_incorrect.png", 60, 60));
-        label_icon_incorrect.setText(String.format("%-5s", "0"));
+        label_icon_incorrect.setText(String.format("%-5s", "" + incorrect));
         label_icon_incorrect.setFont(new Font("Dialog", 0, 24));
-        
+
+        nextQuestion();
+    }
+
+    private void nextQuestion() {
+        if (listVocab.isEmpty()) {
+            return;
+        }
+        currentQues = listVocab.get(Methods.getRandom(listVocab.size()));
+
+        labelQuestion.setText(currentQues.getValue());
+        textFieldAnswer.setText("Enter your answer                           ");
     }
 
     /**
@@ -58,7 +100,7 @@ public class LearnVocaPanel extends javax.swing.JFrame {
 
         panelMain = new javax.swing.JPanel();
         panelTop = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        labelTitle = new javax.swing.JLabel();
         panelCenter = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         label_space_0 = new javax.swing.JLabel();
@@ -82,10 +124,10 @@ public class LearnVocaPanel extends javax.swing.JFrame {
 
         panelTop.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 40, 1));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
-        jLabel1.setText("    Learn Vocabulary    ");
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        panelTop.add(jLabel1);
+        labelTitle.setFont(new java.awt.Font("Dialog", 0, 21)); // NOI18N
+        labelTitle.setText("    Learn Vocabulary    ");
+        labelTitle.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        panelTop.add(labelTitle);
 
         panelMain.add(panelTop, java.awt.BorderLayout.PAGE_START);
 
@@ -112,7 +154,7 @@ public class LearnVocaPanel extends javax.swing.JFrame {
         panelCenter.add(jPanel3);
 
         textFieldAnswer.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
-        textFieldAnswer.setText("Enter your answer                 ");
+        textFieldAnswer.setText("Enter your answer                           ");
         textFieldAnswer.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 textFieldAnswerFocusGained(evt);
@@ -124,6 +166,11 @@ public class LearnVocaPanel extends javax.swing.JFrame {
 
         btnStartAgain.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnStartAgain.setText("Start again");
+        btnStartAgain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStartAgainActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnStartAgain);
 
         label_space_3.setText("                                                      ");
@@ -131,6 +178,11 @@ public class LearnVocaPanel extends javax.swing.JFrame {
 
         btnNext.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         btnNext.setText("Next");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
         jPanel5.add(btnNext);
 
         panelCenter.add(jPanel5);
@@ -147,22 +199,41 @@ public class LearnVocaPanel extends javax.swing.JFrame {
         textFieldAnswer.setText("");
     }//GEN-LAST:event_textFieldAnswerFocusGained
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        new LearnVocaPanel().setVisible(true);
-    }
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+        // TODO add your handling code here:
+        listVocab.remove(currentQues);
+        if (listVocab.isEmpty()) {
+            btnNext.setEnabled(false);
+        }
+        label_icon_remain.setText(String.format("%-5s", "" + listVocab.size()));
+
+        String anwser = textFieldAnswer.getText();
+        if (anwser.equals(currentQues.getKey())) {
+            correct++;
+        } else {
+            incorrect++;
+        }
+        label_icon_correct.setText(String.format("%-5s", "" + correct));
+        label_icon_incorrect.setText(String.format("%-5s", "" + incorrect));
+
+        nextQuestion();
+    }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnStartAgainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStartAgainActionPerformed
+        // TODO add your handling code here:
+        initData();
+        btnNext.setEnabled(true);
+    }//GEN-LAST:event_btnStartAgainActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNext;
     private javax.swing.JButton btnStartAgain;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel labelQuestion;
+    private javax.swing.JLabel labelTitle;
     private javax.swing.JLabel label_icon_correct;
     private javax.swing.JLabel label_icon_incorrect;
     private javax.swing.JLabel label_icon_remain;
@@ -175,4 +246,14 @@ public class LearnVocaPanel extends javax.swing.JFrame {
     private javax.swing.JPanel panelTop;
     private javax.swing.JTextField textFieldAnswer;
     // End of variables declaration//GEN-END:variables
+
+    private void addListeners() {
+        buttonStart.addActionListener((ActionEvent e) -> {
+            panelMain.remove(panelButtonStart);
+            panelMain.add(panelCenter);
+            MainLessonPanel.instance.refreshScreen();
+        });
+
+    }
+
 }
