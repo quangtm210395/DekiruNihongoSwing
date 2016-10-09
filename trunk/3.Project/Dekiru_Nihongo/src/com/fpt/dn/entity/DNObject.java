@@ -58,7 +58,7 @@ public class DNObject {
      * @return the array of answers
      */
     public String[] getQuizAnswer() {
-        return value.split(" | ");
+        return value.split("｜");
     }
 
     /**

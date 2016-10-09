@@ -109,24 +109,24 @@ public class LearnVocabPanel extends javax.swing.JFrame {
         panelTop = new javax.swing.JPanel();
         labelTitle = new javax.swing.JLabel();
         panelCenter = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
-        label_space_0 = new javax.swing.JLabel();
-        label_icon_remain = new javax.swing.JLabel();
+        panel_no_1 = new javax.swing.JPanel();
         label_space_1 = new javax.swing.JLabel();
-        label_icon_correct = new javax.swing.JLabel();
+        label_icon_remain = new javax.swing.JLabel();
         label_space_2 = new javax.swing.JLabel();
+        label_icon_correct = new javax.swing.JLabel();
+        label_space_3 = new javax.swing.JLabel();
         label_icon_incorrect = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        jPanel2Top = new javax.swing.JPanel();
+        panel_no_2 = new javax.swing.JPanel();
+        panel_2_top = new javax.swing.JPanel();
         labelQuestion = new javax.swing.JLabel();
-        jPanel2Bottom = new javax.swing.JPanel();
+        panel_2_bot = new javax.swing.JPanel();
         labelHint = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        panel_no_3 = new javax.swing.JPanel();
         textFieldAnswer = new javax.swing.JTextField();
         labelResult = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
+        panel_no_4 = new javax.swing.JPanel();
         buttonRestart = new javax.swing.JButton();
-        label_space_3 = new javax.swing.JLabel();
+        label_space_4 = new javax.swing.JLabel();
         buttonNext = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -144,35 +144,35 @@ public class LearnVocabPanel extends javax.swing.JFrame {
 
         panelCenter.setLayout(new java.awt.GridLayout(0, 1));
 
-        label_space_0.setText("       ");
-        jPanel1.add(label_space_0);
-        jPanel1.add(label_icon_remain);
-
-        label_space_1.setText("     ");
-        jPanel1.add(label_space_1);
-        jPanel1.add(label_icon_correct);
+        label_space_1.setText("       ");
+        panel_no_1.add(label_space_1);
+        panel_no_1.add(label_icon_remain);
 
         label_space_2.setText("     ");
-        jPanel1.add(label_space_2);
-        jPanel1.add(label_icon_incorrect);
+        panel_no_1.add(label_space_2);
+        panel_no_1.add(label_icon_correct);
 
-        panelCenter.add(jPanel1);
+        label_space_3.setText("     ");
+        panel_no_1.add(label_space_3);
+        panel_no_1.add(label_icon_incorrect);
 
-        jPanel2.setLayout(new java.awt.BorderLayout());
+        panelCenter.add(panel_no_1);
+
+        panel_no_2.setLayout(new java.awt.BorderLayout());
 
         labelQuestion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         labelQuestion.setText("Người kia");
-        jPanel2Top.add(labelQuestion);
+        panel_2_top.add(labelQuestion);
 
-        jPanel2.add(jPanel2Top, java.awt.BorderLayout.PAGE_START);
+        panel_no_2.add(panel_2_top, java.awt.BorderLayout.PAGE_START);
 
         labelHint.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         labelHint.setForeground(java.awt.Color.ORANGE);
-        jPanel2Bottom.add(labelHint);
+        panel_2_bot.add(labelHint);
 
-        jPanel2.add(jPanel2Bottom, java.awt.BorderLayout.PAGE_END);
+        panel_no_2.add(panel_2_bot, java.awt.BorderLayout.PAGE_END);
 
-        panelCenter.add(jPanel2);
+        panelCenter.add(panel_no_2);
 
         textFieldAnswer.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         textFieldAnswer.setText("Enter your answer                           ");
@@ -181,12 +181,12 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 textFieldAnswerFocusGained(evt);
             }
         });
-        jPanel3.add(textFieldAnswer);
+        panel_no_3.add(textFieldAnswer);
 
         labelResult.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel3.add(labelResult);
+        panel_no_3.add(labelResult);
 
-        panelCenter.add(jPanel3);
+        panelCenter.add(panel_no_3);
 
         buttonRestart.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buttonRestart.setText("Start again");
@@ -195,11 +195,11 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 buttonRestartActionPerformed(evt);
             }
         });
-        jPanel4.add(buttonRestart);
+        panel_no_4.add(buttonRestart);
 
-        label_space_3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        label_space_3.setText("                               ");
-        jPanel4.add(label_space_3);
+        label_space_4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        label_space_4.setText("                               ");
+        panel_no_4.add(label_space_4);
 
         buttonNext.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buttonNext.setText("Next");
@@ -208,9 +208,9 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 buttonNextActionPerformed(evt);
             }
         });
-        jPanel4.add(buttonNext);
+        panel_no_4.add(buttonNext);
 
-        panelCenter.add(jPanel4);
+        panelCenter.add(panel_no_4);
 
         panelMain.add(panelCenter, java.awt.BorderLayout.CENTER);
 
@@ -273,12 +273,6 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonNext;
     private javax.swing.JButton buttonRestart;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel2Bottom;
-    private javax.swing.JPanel jPanel2Top;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JLabel labelHint;
     private javax.swing.JLabel labelQuestion;
     private javax.swing.JLabel labelResult;
@@ -286,13 +280,19 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     private javax.swing.JLabel label_icon_correct;
     private javax.swing.JLabel label_icon_incorrect;
     private javax.swing.JLabel label_icon_remain;
-    private javax.swing.JLabel label_space_0;
     private javax.swing.JLabel label_space_1;
     private javax.swing.JLabel label_space_2;
     private javax.swing.JLabel label_space_3;
+    private javax.swing.JLabel label_space_4;
     private javax.swing.JPanel panelCenter;
     private javax.swing.JPanel panelMain;
     private javax.swing.JPanel panelTop;
+    private javax.swing.JPanel panel_2_bot;
+    private javax.swing.JPanel panel_2_top;
+    private javax.swing.JPanel panel_no_1;
+    private javax.swing.JPanel panel_no_2;
+    private javax.swing.JPanel panel_no_3;
+    private javax.swing.JPanel panel_no_4;
     private javax.swing.JTextField textFieldAnswer;
     // End of variables declaration//GEN-END:variables
 

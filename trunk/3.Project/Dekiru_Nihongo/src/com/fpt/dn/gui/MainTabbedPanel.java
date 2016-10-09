@@ -175,6 +175,11 @@ public class MainTabbedPanel extends javax.swing.JFrame {
             dataTableGram.setRowHeight(30);
             panelGram.add(new JScrollPane(dataTableGram));
         }
+
+        // Quiz
+        if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
+            panelQuiz.add(new MainQuizPanel(lesson).getPanelMain());
+        }
     }
 
 }
