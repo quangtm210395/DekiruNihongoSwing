@@ -29,6 +29,7 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     private int correct;
     private int incorrect;
     private String lesson;
+    private final String begeinText = "Enter your answer                           ";
 
     /**
      * Creates new form LearnVocabPanel
@@ -52,6 +53,7 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     }
 
     private void initScreen() {
+
         buttonStart = new JButton("Start");
         buttonStart.setFont(new Font("Dialog", 0, 24));
         panelButtonStart = new JPanel(new BorderLayout());
@@ -81,13 +83,17 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     }
 
     private void nextQuestion() {
+        labelResult.setText("");
+        labelHint.setText("");
+        textFieldAnswer.setText("");
         if (listVocab.isEmpty()) {
             return;
         }
         currentQues = listVocab.get(Methods.getRandom(listVocab.size()));
 
         labelQuestion.setText(currentQues.getValue());
-        textFieldAnswer.setText("Enter your answer                           ");
+        textFieldAnswer.setText(begeinText);
+        textFieldAnswer.setEnabled(true);
     }
 
     /**
@@ -103,19 +109,22 @@ public class LearnVocabPanel extends javax.swing.JFrame {
         panelTop = new javax.swing.JPanel();
         labelTitle = new javax.swing.JLabel();
         panelCenter = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         label_space_0 = new javax.swing.JLabel();
         label_icon_remain = new javax.swing.JLabel();
         label_space_1 = new javax.swing.JLabel();
         label_icon_correct = new javax.swing.JLabel();
         label_space_2 = new javax.swing.JLabel();
         label_icon_incorrect = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jPanel2Top = new javax.swing.JPanel();
         labelQuestion = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        textFieldAnswer = new javax.swing.JTextField();
+        jPanel2Bottom = new javax.swing.JPanel();
         labelHint = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        textFieldAnswer = new javax.swing.JTextField();
+        labelResult = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         buttonRestart = new javax.swing.JButton();
         label_space_3 = new javax.swing.JLabel();
         buttonNext = new javax.swing.JButton();
@@ -136,24 +145,34 @@ public class LearnVocabPanel extends javax.swing.JFrame {
         panelCenter.setLayout(new java.awt.GridLayout(0, 1));
 
         label_space_0.setText("       ");
-        jPanel2.add(label_space_0);
-        jPanel2.add(label_icon_remain);
+        jPanel1.add(label_space_0);
+        jPanel1.add(label_icon_remain);
 
         label_space_1.setText("     ");
-        jPanel2.add(label_space_1);
-        jPanel2.add(label_icon_correct);
+        jPanel1.add(label_space_1);
+        jPanel1.add(label_icon_correct);
 
         label_space_2.setText("     ");
-        jPanel2.add(label_space_2);
-        jPanel2.add(label_icon_incorrect);
+        jPanel1.add(label_space_2);
+        jPanel1.add(label_icon_incorrect);
 
-        panelCenter.add(jPanel2);
+        panelCenter.add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
 
         labelQuestion.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         labelQuestion.setText("Người kia");
-        jPanel3.add(labelQuestion);
+        jPanel2Top.add(labelQuestion);
 
-        panelCenter.add(jPanel3);
+        jPanel2.add(jPanel2Top, java.awt.BorderLayout.PAGE_START);
+
+        labelHint.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labelHint.setForeground(java.awt.Color.ORANGE);
+        jPanel2Bottom.add(labelHint);
+
+        jPanel2.add(jPanel2Bottom, java.awt.BorderLayout.PAGE_END);
+
+        panelCenter.add(jPanel2);
 
         textFieldAnswer.setFont(new java.awt.Font("Dialog", 0, 24)); // NOI18N
         textFieldAnswer.setText("Enter your answer                           ");
@@ -162,12 +181,12 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 textFieldAnswerFocusGained(evt);
             }
         });
-        jPanel4.add(textFieldAnswer);
+        jPanel3.add(textFieldAnswer);
 
-        labelHint.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jPanel4.add(labelHint);
+        labelResult.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jPanel3.add(labelResult);
 
-        panelCenter.add(jPanel4);
+        panelCenter.add(jPanel3);
 
         buttonRestart.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buttonRestart.setText("Start again");
@@ -176,11 +195,11 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 buttonRestartActionPerformed(evt);
             }
         });
-        jPanel5.add(buttonRestart);
+        jPanel4.add(buttonRestart);
 
         label_space_3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         label_space_3.setText("                               ");
-        jPanel5.add(label_space_3);
+        jPanel4.add(label_space_3);
 
         buttonNext.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         buttonNext.setText("Next");
@@ -189,9 +208,9 @@ public class LearnVocabPanel extends javax.swing.JFrame {
                 buttonNextActionPerformed(evt);
             }
         });
-        jPanel5.add(buttonNext);
+        jPanel4.add(buttonNext);
 
-        panelCenter.add(jPanel5);
+        panelCenter.add(jPanel4);
 
         panelMain.add(panelCenter, java.awt.BorderLayout.CENTER);
 
@@ -200,21 +219,14 @@ public class LearnVocabPanel extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void textFieldAnswerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAnswerFocusGained
-        // TODO add your handling code here:
-        textFieldAnswer.setText("");
-    }//GEN-LAST:event_textFieldAnswerFocusGained
-
     private void buttonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextActionPerformed
         // TODO add your handling code here:
-        if ("".equals(labelHint.getText())) {
-            if (!textFieldAnswerActionPerformed(null)) {
+        if ("".equals(labelResult.getText())) {
+            if (textFieldAnswerActionPerformed(null)) {
                 textFieldAnswer.setText("");
             }
             return;
         }
-        textFieldAnswer.setEnabled(true);
-        labelHint.setText("");
 
         listVocab.remove(currentQues);
         if (listVocab.isEmpty()) {
@@ -233,33 +245,43 @@ public class LearnVocabPanel extends javax.swing.JFrame {
         textFieldAnswer.setEnabled(true);
     }//GEN-LAST:event_buttonRestartActionPerformed
 
+    private void textFieldAnswerFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textFieldAnswerFocusGained
+        // TODO add your handling code here:
+        textFieldAnswer.setText("");
+    }//GEN-LAST:event_textFieldAnswerFocusGained
+
     private boolean textFieldAnswerActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
         textFieldAnswer.setEnabled(false);
+        labelHint.setText(currentQues.getKey());
+
         String anwser = textFieldAnswer.getText();
         if (anwser.equals(currentQues.getKey())) {
-            labelHint.setForeground(Color.GREEN);
-            labelHint.setText("Correct");
+            labelResult.setForeground(Color.GREEN);
+            labelResult.setText("Correct");
             correct++;
         } else {
-            labelHint.setForeground(Color.RED);
-            labelHint.setText("Incorrect");
+            labelResult.setForeground(Color.RED);
+            labelResult.setText("Incorrect");
             incorrect++;
         }
         label_icon_correct.setText(String.format("%-5s", "" + correct));
         label_icon_incorrect.setText(String.format("%-5s", "" + incorrect));
-        return anwser.equals(currentQues.getKey());
+        return (begeinText.equals(textFieldAnswer.getText()));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonNext;
     private javax.swing.JButton buttonRestart;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel2Bottom;
+    private javax.swing.JPanel jPanel2Top;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
     private javax.swing.JLabel labelHint;
     private javax.swing.JLabel labelQuestion;
+    private javax.swing.JLabel labelResult;
     private javax.swing.JLabel labelTitle;
     private javax.swing.JLabel label_icon_correct;
     private javax.swing.JLabel label_icon_incorrect;

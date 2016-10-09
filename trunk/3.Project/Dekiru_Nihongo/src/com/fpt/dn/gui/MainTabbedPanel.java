@@ -71,7 +71,6 @@ public class MainTabbedPanel extends javax.swing.JFrame {
         panelMain.setLayout(new java.awt.BorderLayout());
 
         buttonnLearn.setText("Learn vocabulary");
-        buttonnLearn.setFont(new java.awt.Font("Dialog", 0, 18));
 
         tabbedPanel.addTab(Properties.tabVoca, panelVoca);
         panelVoca.setLayout(new BorderLayout());
