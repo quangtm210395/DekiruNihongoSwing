@@ -112,7 +112,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="label_space_a">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="                                      "/>
+                        <Property name="text" type="java.lang.String" value="                                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="label_hint_a">
@@ -173,7 +173,7 @@
                   <SubComponents>
                     <Component class="javax.swing.JLabel" name="label_space_c">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="                                      "/>
+                        <Property name="text" type="java.lang.String" value="                                 "/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="label_hint_c">

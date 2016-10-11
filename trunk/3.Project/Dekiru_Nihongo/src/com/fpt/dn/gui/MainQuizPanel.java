@@ -9,7 +9,10 @@ import com.fpt.dn.bo.Methods;
 import com.fpt.dn.dao.LessonData;
 import com.fpt.dn.entity.DNObject;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,8 +21,9 @@ import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 
 /**
  *
@@ -58,12 +62,19 @@ public class MainQuizPanel extends javax.swing.JFrame {
     }
 
     private void initScreen() {
+        panelButtonStart = new JPanel(new GridLayout(4, 1));
+        panelButtonStart.add(new JLabel(""));
+        
         buttonStart = new JButton("Start");
-        buttonStart.setFont(new Font("Dialog", 0, 24));
-        panelButtonStart = new JPanel(new BorderLayout());
-        panelButtonStart.add(buttonStart, BorderLayout.SOUTH);
+        buttonStart.setFont(new Font("Dialog", 0, 28));
+        
+        JPanel panelFlowBorder = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelFlowBorder.add(buttonStart);
+        panelButtonStart.add(panelFlowBorder);
+        
         panelMain.remove(panelCenter);
         panelMain.add(panelButtonStart);
+        
         repaint();
     }
 
@@ -200,7 +211,7 @@ public class MainQuizPanel extends javax.swing.JFrame {
 
         panel_3_top_left.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        label_space_a.setText("                                      ");
+        label_space_a.setText("                                 ");
         panel_3_top_left.add(label_space_a);
         panel_3_top_left.add(label_hint_a);
 
@@ -230,7 +241,7 @@ public class MainQuizPanel extends javax.swing.JFrame {
 
         panel_4_bot_left.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        label_space_c.setText("                                      ");
+        label_space_c.setText("                                 ");
         panel_4_bot_left.add(label_space_c);
         panel_4_bot_left.add(label_hint_c);
 

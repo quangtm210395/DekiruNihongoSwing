@@ -53,7 +53,6 @@ public class LearnVocabPanel extends javax.swing.JFrame {
     }
 
     private void initScreen() {
-
         buttonStart = new JButton("Start");
         buttonStart.setFont(new Font("Dialog", 0, 24));
         panelButtonStart = new JPanel(new BorderLayout());

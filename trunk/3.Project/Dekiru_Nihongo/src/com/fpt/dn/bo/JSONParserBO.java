@@ -64,7 +64,7 @@ public class JSONParserBO {
                 list.add(objectDN);
             }
         } catch (JSONException e) {
-            e.printStackTrace();
+//            e.printStackTrace();
             return null;
         }
         return list;

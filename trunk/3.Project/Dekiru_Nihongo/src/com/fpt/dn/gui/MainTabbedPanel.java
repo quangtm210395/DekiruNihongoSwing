@@ -10,14 +10,20 @@ import com.fpt.dn.entity.DNObject;
 import com.fpt.dn.entity.Properties;
 import com.fpt.dn.entity.UnEditableTableModel;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,13 +32,16 @@ import javax.swing.table.DefaultTableModel;
  */
 public class MainTabbedPanel extends javax.swing.JFrame {
 
-    private javax.swing.JPanel panelVoca;
-    private javax.swing.JPanel panelGram;
-    private javax.swing.JPanel panelKanji;
-    private javax.swing.JPanel panelQuiz;
+    private JPanel panelVoca;
+    private JPanel panelGram;
+    private JPanel panelKanji;
+    private JPanel panelQuiz;
+    private JPanel panelEmptyGram;
+    private JPanel panelEmptyKanji;
+    private JPanel panelEmptyQuiz;
 
-    private javax.swing.JPanel panelMain;
-    private javax.swing.JButton buttonnLearn;
+    private JPanel panelMain;
+    private JButton buttonnLearn;
 
     private JTable dataTableVoca;
     private JTable dataTableGram;
@@ -46,6 +55,7 @@ public class MainTabbedPanel extends javax.swing.JFrame {
      */
     public MainTabbedPanel(String lesson) {
         initComponents();
+        initScreen();
         initData(lesson);
         addListeners(lesson);
     }
@@ -83,6 +93,7 @@ public class MainTabbedPanel extends javax.swing.JFrame {
         panelKanji.setLayout(new BorderLayout());
 
         tabbedPanel.addTab(Properties.tabQuiz, panelQuiz);
+        panelQuiz.setLayout(new BorderLayout());
 
         panelMain.add(tabbedPanel, java.awt.BorderLayout.CENTER);
 
@@ -157,6 +168,8 @@ public class MainTabbedPanel extends javax.swing.JFrame {
             dataTableKanji.setFont(new Font("Dialog", 0, 20));
             dataTableKanji.setRowHeight(30);
             panelKanji.add(new JScrollPane(dataTableKanji));
+        } else {
+            panelKanji.add(panelEmptyKanji);
         }
 
         // Grammar
@@ -174,12 +187,48 @@ public class MainTabbedPanel extends javax.swing.JFrame {
             dataTableGram.setFont(new Font("Dialog", 0, 20));
             dataTableGram.setRowHeight(30);
             panelGram.add(new JScrollPane(dataTableGram));
+        } else {
+            panelGram.add(panelEmptyGram);
         }
 
         // Quiz
         if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
             panelQuiz.add(new MainQuizPanel(lesson).getPanelMain());
+        } else {
+            panelQuiz.add(panelEmptyQuiz);
         }
+    }
+
+    private void initScreen() {
+        panelEmptyGram = new JPanel(new GridLayout(4, 1));
+        panelEmptyGram.add(new JLabel(""));
+        JLabel labelFoolGram = new JLabel("    COMING SOON    ");
+        labelFoolGram.setFont(new Font("Dialog", 0, 28));
+        labelFoolGram.setForeground(Color.GREEN);
+        labelFoolGram.setBorder(new LineBorder(Color.ORANGE, 2));
+        JPanel panelFoolGram = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelFoolGram.add(labelFoolGram);
+        panelEmptyGram.add(panelFoolGram);
+        
+        panelEmptyQuiz = new JPanel(new GridLayout(4, 1));
+        panelEmptyQuiz.add(new JLabel(""));
+        JLabel labelFoolQuiz = new JLabel("    COMING SOON    ");
+        labelFoolQuiz.setFont(new Font("Dialog", 0, 28));
+        labelFoolQuiz.setForeground(Color.GREEN);
+        labelFoolQuiz.setBorder(new LineBorder(Color.ORANGE, 2));
+        JPanel panelFoolQuiz = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelFoolQuiz.add(labelFoolQuiz);
+        panelEmptyQuiz.add(panelFoolQuiz);
+        
+        panelEmptyKanji = new JPanel(new GridLayout(4, 1));
+        panelEmptyKanji.add(new JLabel(""));
+        JLabel labelFoolKanji = new JLabel("    COMING SOON    ");
+        labelFoolKanji.setFont(new Font("Dialog", 0, 28));
+        labelFoolKanji.setForeground(Color.GREEN);
+        labelFoolKanji.setBorder(new LineBorder(Color.ORANGE, 2));
+        JPanel panelFoolKanji = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        panelFoolKanji.add(labelFoolKanji);
+        panelEmptyKanji.add(panelFoolKanji);
     }
 
 }
