@@ -5,18 +5,23 @@
  */
 package com.fpt.dn.gui;
 
+import com.fpt.dn.bo.Methods;
 import com.fpt.dn.dao.DataProvider;
 import com.fpt.dn.entity.Properties;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Stack;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -35,12 +40,15 @@ public class MainLessonPanel extends javax.swing.JFrame {
     public static MainLessonPanel instance = new MainLessonPanel();
 
     private final Stack<JPanel> stackPanel = new Stack<>();
-    private final String title = "できる 日本語";
+    private final Stack<String> stackTitle = new Stack<>();
+    private String title = "できる 日本語";
 
     private JPanel panelMain;
+    private JPanel panelAll;
+    private JPanel panelScreen;
     private JButton buttonBack;
     private JButton buttonSearch;
-    JList<String> listLesson;
+    private JList<String> listLesson;
 
     /**
      * Creates new form MainLessonPanel
@@ -48,12 +56,14 @@ public class MainLessonPanel extends javax.swing.JFrame {
     public MainLessonPanel() {
         settingWindow();
         initComponents();
+        initScreen();
         addListeners();
     }
 
     private void settingWindow() {
 
-        setTitle(title);
+        setTitle(" Dekiru Nihongo");
+        setIconImage(new ImageIcon("src/icon/logo_main.png").getImage());
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,7 +75,7 @@ public class MainLessonPanel extends javax.swing.JFrame {
 
     private void initComponents() {
 
-        JPanel panelAll = new JPanel(new BorderLayout());
+        panelAll = new JPanel(new BorderLayout());
         getContentPane().add(panelAll, BorderLayout.CENTER);
 
         JPanel panelTop = new JPanel(new BorderLayout());
@@ -117,7 +127,20 @@ public class MainLessonPanel extends javax.swing.JFrame {
         });
 
         buttonSearch.addActionListener((ActionEvent event) -> {
+            if (stackPanel.peek().getLayout() instanceof GridLayout) {
+                return;
+            }
+            JPanel panelSearch = new JPanel(new GridLayout(4, 1));
+            panelSearch.add(new JLabel(""));
+            JLabel labelFoolKanji = new JLabel("    COMING SOON    ");
+            labelFoolKanji.setFont(new Font("Dialog", 0, 28));
+            labelFoolKanji.setForeground(Color.GREEN);
+            labelFoolKanji.setBorder(new LineBorder(Color.ORANGE, 2));
+            JPanel panelFoolKanji = new JPanel(new FlowLayout(FlowLayout.CENTER));
+            panelFoolKanji.add(labelFoolKanji);
+            panelSearch.add(panelFoolKanji);
 
+            nextStackPanel(panelSearch);
         });
 
         listLesson.addMouseListener(new MouseAdapter() {
@@ -152,5 +175,27 @@ public class MainLessonPanel extends javax.swing.JFrame {
     public void refreshScreen() {
         pack();
         setSize(Properties.screenWidth, Properties.screenHeight);
+    }
+
+    private void initScreen() {
+        panelScreen = new JPanel(new BorderLayout());
+        getContentPane().add(panelScreen, BorderLayout.CENTER);
+        JLabel labelScreen = new JLabel(Methods.newImageIcon(
+                "src/icon/image_screen.png",
+                Properties.screenWidth,
+                Properties.screenHeight));
+        panelScreen.add(labelScreen, BorderLayout.CENTER);
+        getContentPane().remove(panelAll);
+        getContentPane().add(panelScreen, BorderLayout.CENTER);
+        refreshScreen();
+
+        labelScreen.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                getContentPane().remove(panelScreen);
+                getContentPane().add(panelAll, BorderLayout.CENTER);
+                refreshScreen();
+            }
+        });
     }
 }

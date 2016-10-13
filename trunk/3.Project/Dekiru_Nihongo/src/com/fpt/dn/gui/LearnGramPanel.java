@@ -72,7 +72,10 @@ public class LearnGramPanel extends javax.swing.JFrame {
         textAreaValue.setColumns(20);
         textAreaValue.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         textAreaValue.setForeground(new java.awt.Color(51, 51, 55));
+        textAreaValue.setLineWrap(true);
         textAreaValue.setRows(5);
+        textAreaValue.setWrapStyleWord(true);
+        textAreaValue.setPreferredSize(new java.awt.Dimension(400, 95));
         jPanel2.add(textAreaValue);
 
         panelCenter.add(jPanel2, java.awt.BorderLayout.CENTER);

@@ -81,6 +81,7 @@ public class MainTabbedPanel extends javax.swing.JFrame {
         panelMain.setLayout(new java.awt.BorderLayout());
 
         buttonnLearn.setText("Learn vocabulary");
+        buttonnLearn.setForeground(Color.RED);
 
         tabbedPanel.addTab(Properties.tabVoca, panelVoca);
         panelVoca.setLayout(new BorderLayout());
@@ -107,7 +108,7 @@ public class MainTabbedPanel extends javax.swing.JFrame {
             MainLessonPanel.instance.nextStackPanel(new LearnVocabPanel(lesson).getPanelMain());
         });
 
-        if (lesson.charAt(0) <= '4' && lesson.length() == 1) {
+        if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
             dataTableGram.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -173,7 +174,7 @@ public class MainTabbedPanel extends javax.swing.JFrame {
         }
 
         // Grammar
-        if (lesson.charAt(0) <= '4' && lesson.length() == 1) {
+        if (lesson.charAt(0) <= '3' && lesson.length() == 1) {
             UnEditableTableModel defaultTableModelGram = new UnEditableTableModel();
             defaultTableModelGram.addColumn("");
             defaultTableModelGram.addColumn("");

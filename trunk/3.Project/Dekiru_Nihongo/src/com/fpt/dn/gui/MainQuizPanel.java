@@ -360,13 +360,6 @@ public class MainQuizPanel extends javax.swing.JFrame {
         initData();
     }//GEN-LAST:event_buttonRestartActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        new MainQuizPanel("1").setVisible(true);
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroupChoices;
     private javax.swing.JButton buttonNext;
